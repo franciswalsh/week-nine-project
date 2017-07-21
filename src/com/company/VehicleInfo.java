@@ -20,6 +20,9 @@ public class VehicleInfo {
         this.engineSize = engineSize;
     }
 
+    public VehicleInfo() {
+    }
+
     public int getVin() {
         return this.vin;
     }

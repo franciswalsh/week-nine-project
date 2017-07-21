@@ -1,7 +1,10 @@
 package com.company;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -31,26 +34,33 @@ public class Main {
         telematicsService.report(vehicleCreated);
 
         int numberOfFiles = 0;
-        List<Object> fileContents = new ArrayList<>();
+        File fileReadCounter = new File(".");
+        for (File f: fileReadCounter.listFiles()){
+            if (f.getName().endsWith(".json")) {
+                numberOfFiles++;
+            }
+        }
+
+        VehicleInfo[] allVehicles = new VehicleInfo[numberOfFiles];
+        int counter = 0;
         File fileRead = new File(".");
         for (File f : fileRead.listFiles()) {
-            numberOfFiles++;
+
             if (f.getName().endsWith(".json")) {
                 File file = new File(String.valueOf(f));
                 try {
                     Scanner fileScanner = new Scanner(file);
-
-                    while(fileScanner.hasNext()){
-                        fileContents.add(fileScanner.nextLine());
-                    }
+                    ObjectMapper mapper = new ObjectMapper();
+                    VehicleInfo vi = mapper.readValue(file, VehicleInfo.class);
+                    allVehicles[counter] = vi;
                 }
-                catch (FileNotFoundException ex){
+                catch (IOException ex){
                     System.out.println("Could not find file *" + String.valueOf(f) + "*");
                     ex.printStackTrace();
                 }
+                counter++;
             }
         }
-        Object[] vehicles = fileContents.toArray();
-        System.out.println(vehicles[0]);
+        System.out.println(allVehicles[4].getVin());
     }
 }

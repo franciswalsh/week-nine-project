@@ -1,4 +1,9 @@
 package com.company;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -25,6 +30,27 @@ public class Main {
 
         telematicsService.report(vehicleCreated);
 
+        int numberOfFiles = 0;
+        List<Object> fileContents = new ArrayList<>();
+        File fileRead = new File(".");
+        for (File f : fileRead.listFiles()) {
+            numberOfFiles++;
+            if (f.getName().endsWith(".json")) {
+                File file = new File(String.valueOf(f));
+                try {
+                    Scanner fileScanner = new Scanner(file);
 
+                    while(fileScanner.hasNext()){
+                        fileContents.add(fileScanner.nextLine());
+                    }
+                }
+                catch (FileNotFoundException ex){
+                    System.out.println("Could not find file *" + String.valueOf(f) + "*");
+                    ex.printStackTrace();
+                }
+            }
+        }
+        Object[] vehicles = fileContents.toArray();
+        System.out.println(vehicles[0]);
     }
 }

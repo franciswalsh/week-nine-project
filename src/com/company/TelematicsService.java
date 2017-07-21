@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.io.FileReader;
 /**
  * Created by franciswalsh on 7/21/17.
  */
@@ -19,8 +19,6 @@ public class TelematicsService {
             fileWriter.write(json);
             fileWriter.close();
             VehicleInfo vi = mapper.readValue(json, VehicleInfo.class);
-            System.out.println(vi.getVin());
-
         }
         catch (JsonProcessingException ex){
             System.out.println("Json processing exception");

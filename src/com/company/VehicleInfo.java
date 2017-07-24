@@ -62,4 +62,8 @@ public class VehicleInfo {
     public void setEngineSize(double engineSize) {
         this.engineSize = engineSize;
     }
+
+//    public double getMilesPerGallon(){
+//        return Math.round((this.getOdometer() / this.getConsumption())*10.0)/10.0;
+//    }
 }

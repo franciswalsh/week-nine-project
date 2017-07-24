@@ -124,6 +124,9 @@ public class Main {
                         "</td align=\"center\"><td align=\"center\">" +
                         Math.round(vehicle.getEngineSize()*10.0)/10.0 +
                         "</td>\n" +
+//                                "</td align=\"center\"><td align=\"center\">" +
+//                                vehicle.getMilesPerGallon() +
+//                                "</td>\n" +
                         "        </tr>");
             }
             htmlFileWriter.write(" </table>\n" +
